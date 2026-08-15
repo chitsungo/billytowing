@@ -82,20 +82,22 @@ button { color: inherit; }
 .hero-copy { max-width: 780px; }
 .hero-copy h1 { font-size: clamp(3.8rem, 7.4vw, 7.7rem); font-weight: 730; letter-spacing: -.065em; line-height: .9; margin: 0; max-width: 820px; text-wrap: balance; }
 .hero-body { color: var(--grey); font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.7; margin: 28px 0 34px; max-width: 580px; }
-.hero-actions { align-items: center; display: flex; gap: 28px; }
+.hero-actions { align-items: center; display: flex; gap: 28px; pointer-events: auto; position: relative; z-index: 3; }
+.hero-actions a { touch-action: manipulation; }
 .hero-status { align-items: center; backdrop-filter: blur(14px); background: rgba(10,10,10,.62); border: 1px solid rgba(255,255,255,.18); display: flex; gap: 14px; padding: 17px 20px; }
 .status-dot { background: var(--white); border: 5px solid rgba(0,43,91,.9); border-radius: 50%; height: 16px; width: 16px; }
 .hero-status div { display: flex; flex-direction: column; line-height: 1.25; }
 .hero-status small { color: var(--grey); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; }
 .hero-status a { font-size: .88rem; font-weight: 750; margin-top: 4px; }
-.carousel-controls { align-items: center; bottom: 34px; display: flex; isolation: isolate; justify-content: space-between; left: 50%; pointer-events: auto; position: absolute; transform: translateX(-50%); z-index: 10; }
+.carousel-controls { align-items: center; bottom: 34px; display: flex; isolation: isolate; justify-content: space-between; left: 50%; pointer-events: auto; position: absolute; touch-action: manipulation; transform: translateX(-50%); z-index: 10; }
 .carousel-dots { align-items: center; display: flex; gap: 7px; }
-.carousel-dots button { background: none; border: 0; cursor: pointer; height: 24px; padding: 8px 0; width: 38px; }
+.carousel-dots button { -webkit-tap-highlight-color: transparent; background: none; border: 0; cursor: pointer; height: 44px; padding: 18px 0; touch-action: manipulation; transition: transform 160ms var(--ease-smooth); user-select: none; width: 40px; }
 .carousel-dots button span { background: rgba(255,255,255,.36); display: block; height: 2px; overflow: hidden; position: relative; width: 100%; }
 .carousel-dots button.active span { background: var(--white); }
 .carousel-arrows { display: flex; gap: 8px; }
-.carousel-arrows button { align-items: center; background: rgba(10,10,10,.55); border: 1px solid rgba(255,255,255,.28); cursor: pointer; display: flex; height: 46px; justify-content: center; transition: background 160ms var(--ease-smooth); width: 46px; }
+.carousel-arrows button { -webkit-tap-highlight-color: transparent; align-items: center; background: rgba(10,10,10,.55); border: 1px solid rgba(255,255,255,.28); cursor: pointer; display: flex; height: 48px; justify-content: center; touch-action: manipulation; transition: background 160ms var(--ease-smooth), border-color 160ms var(--ease-smooth), transform 160ms var(--ease-smooth); user-select: none; width: 48px; }
 .carousel-arrows button:hover { background: var(--navy); }
+.carousel-dots button:active, .carousel-arrows button:active { transform: scale(.94); }
 .carousel-arrows button:first-child svg { transform: rotate(180deg); }
 .carousel-arrows svg { height: 18px; width: 18px; }
 
@@ -336,8 +338,8 @@ button { color: inherit; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
   .hero-actions .button { width: 100%; }
   .carousel-controls { bottom: 22px; }
-  .carousel-dots button { width: 26px; }
-  .carousel-arrows button { height: 40px; width: 40px; }
+  .carousel-dots button { height: 48px; padding-block: 21px; width: 34px; }
+  .carousel-arrows button { height: 48px; width: 48px; }
   .trust-grid span { font-size: .61rem; }
   .trust-grid svg { height: 18px; width: 18px; }
   .section-heading-row { align-items: flex-start; flex-direction: column; gap: 28px; margin-bottom: 38px; }

@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getCarouselIndex } from "./carousel";
 import { heroSlides, PHONE_DISPLAY, PHONE_TEL, services, siteImages, WHATSAPP_URL } from "./data";
 import { Icon } from "./icons";
 
@@ -194,18 +195,46 @@ export function FloatingActions() {
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
+  const [timerVersion, setTimerVersion] = useState(0);
+  const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setTimeout(
-      () => setActive((value) => (value + 1) % heroSlides.length),
+      () => {
+        timerRef.current = null;
+        setActive((value) => getCarouselIndex(value, 1, heroSlides.length));
+      },
       6000,
     );
-    return () => window.clearTimeout(timer);
-  }, [active]);
+    timerRef.current = timer;
+
+    return () => {
+      window.clearTimeout(timer);
+      if (timerRef.current === timer) timerRef.current = null;
+    };
+  }, [active, timerVersion]);
+
+  const cancelAutoAdvance = () => {
+    if (timerRef.current === null) return;
+    window.clearTimeout(timerRef.current);
+    timerRef.current = null;
+  };
+
+  const resetAutoAdvance = () => {
+    setTimerVersion((value) => value + 1);
+  };
+
+  const select = (index: number) => {
+    cancelAutoAdvance();
+    setActive(index);
+    resetAutoAdvance();
+  };
 
   const move = (direction: number) => {
-    setActive((value) => (value + direction + heroSlides.length) % heroSlides.length);
+    cancelAutoAdvance();
+    setActive((value) => getCarouselIndex(value, direction, heroSlides.length));
+    resetAutoAdvance();
   };
 
   return (
@@ -246,14 +275,18 @@ export function HeroCarousel() {
         </article>
       ))}
 
-      <div className="carousel-controls container">
+      <div
+        className="carousel-controls container"
+        onPointerDown={cancelAutoAdvance}
+        onPointerCancel={resetAutoAdvance}
+      >
         <div className="carousel-dots" role="tablist" aria-label="Choose slide">
           {heroSlides.map((slide, index) => (
             <button
               type="button"
               key={slide.title}
               className={index === active ? "active" : ""}
-              onClick={() => setActive(index)}
+              onClick={() => select(index)}
               aria-label={`Show slide ${index + 1}: ${slide.title}`}
               aria-selected={index === active}
               role="tab"
