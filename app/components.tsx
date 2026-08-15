@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { heroSlides, PHONE_DISPLAY, PHONE_TEL, services, siteImages, WHATSAPP_URL } from "./data";
@@ -151,12 +151,32 @@ export function Footer() {
 
 export function FloatingActions() {
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
+
   return (
-    <div className={`fab-wrap ${open ? "open" : ""}`}>
-      <div className="fab-menu" aria-hidden={!open}>
-        <a href={`tel:${PHONE_TEL}`}><span>Call Now</span><Icon name="phone" /></a>
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"><span>WhatsApp</span><Icon name="message" /></a>
-        <a href="/contact#request"><span>Book Now</span><Icon name="calendar" /></a>
+    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""}`}>
+      <div id="quick-actions-menu" className="fab-menu" aria-hidden={!open}>
+        <a href={`tel:${PHONE_TEL}`} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>Call Now</span><Icon name="phone" /></a>
+        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>WhatsApp</span><Icon name="message" /></a>
+        <a href="/contact#request" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>Book Now</span><Icon name="calendar" /></a>
       </div>
       <button
         type="button"
@@ -164,6 +184,7 @@ export function FloatingActions() {
         onClick={() => setOpen((value) => !value)}
         aria-label={open ? "Close quick actions" : "Open quick actions"}
         aria-expanded={open}
+        aria-controls="quick-actions-menu"
       >
         <Icon name={open ? "close" : "plus"} />
       </button>
@@ -173,35 +194,28 @@ export function FloatingActions() {
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setTimeout(
       () => setActive((value) => (value + 1) % heroSlides.length),
       6000,
     );
-    return () => window.clearInterval(timer);
-  }, [paused]);
+    return () => window.clearTimeout(timer);
+  }, [active]);
 
   const move = (direction: number) => {
     setActive((value) => (value + direction + heroSlides.length) % heroSlides.length);
   };
 
   return (
-    <section
-      className="hero-carousel"
-      aria-label="Billy Towing emergency services"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-    >
+    <section className="hero-carousel" aria-label="Billy Towing emergency services">
       {heroSlides.map((slide, index) => (
         <article
           className={`hero-slide ${index === active ? "active" : ""}`}
           key={slide.title}
           aria-hidden={index !== active}
+          inert={index !== active}
         >
           <img
             src={slide.image.src}
