@@ -186,7 +186,7 @@ export function FloatingActions() {
         aria-expanded={open}
         aria-controls="quick-actions-menu"
       >
-        <Icon name={open ? "close" : "plus"} />
+        <Icon name={open ? "close" : "message"} />
       </button>
     </div>
   );
