@@ -1,4 +1,4 @@
-import { CallToAction, HeroCarousel, SectionIntro, ServiceCard } from "./components";
+import { CallToAction, GalleryGrid, HeroCarousel, SectionIntro, ServiceCard } from "./components";
 import { PHONE_TEL, services } from "./data";
 import { Icon } from "./icons";
 
@@ -48,6 +48,16 @@ export default function Home() {
             </div>
             <a className="button button-outline" href={`tel:${PHONE_TEL}`}><Icon name="phone" />Speak to the team</a>
           </div>
+        </div>
+      </section>
+
+      <section className="section gallery-section sm:hidden">
+        <div className="container">
+          <div className="section-heading-row">
+            <SectionIntro eyebrow="Recent work" title="Real recoveries. Real equipment." body="A look at Billy Towing vehicles and recent transport work across Harare." />
+            <a className="text-link section-link" href="/gallery">View full gallery <Icon name="arrow" /></a>
+          </div>
+          <GalleryGrid limit={6} />
         </div>
       </section>
 
