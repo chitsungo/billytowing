@@ -151,6 +151,7 @@ export function Footer() {
 }
 
 export function FloatingActions() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -173,7 +174,7 @@ export function FloatingActions() {
   }, [open]);
 
   return (
-    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""}`}>
+    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""} ${pathname === "/contact" ? "contact-page-fab" : ""}`}>
       <div id="quick-actions-menu" className="fab-menu" aria-hidden={!open}>
         <a href={`tel:${PHONE_TEL}`} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>Call Now</span><Icon name="phone" /></a>
         <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>WhatsApp</span><Icon name="message" /></a>
@@ -417,17 +418,21 @@ export function GalleryGrid({ limit }: { limit?: number }) {
 
 export function BookingForm() {
   const [message, setMessage] = useState("");
+  const [service, setService] = useState("");
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
+    const selectedService = String(form.get("service") || "");
+    const specifiedService = String(form.get("specifiedService") || "").trim();
+    const helpNeeded = selectedService === "Specify" ? specifiedService : selectedService;
     const text = [
       "Hello Billy Towing, I need assistance.",
       `Name: ${form.get("name")}`,
       `Phone: ${form.get("phone")}`,
       `Location: ${form.get("location")}`,
       `Vehicle: ${form.get("vehicle")}`,
-      `Help needed: ${form.get("service")}`,
+      `Help needed: ${helpNeeded}`,
       `Details: ${form.get("details") || "Not provided"}`,
     ].join("\n");
     window.open(`https://wa.me/263774870729?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
@@ -437,18 +442,22 @@ export function BookingForm() {
   return (
     <form className="booking-form" onSubmit={submit}>
       <div className="form-grid">
-        <label><span>Your name</span><input name="name" type="text" autoComplete="name" required placeholder="Full name" /></label>
-        <label><span>Phone number</span><input name="phone" type="tel" autoComplete="tel" required placeholder="e.g. 0774 870 729" /></label>
-        <label><span>Your location</span><input name="location" type="text" required placeholder="Road, suburb or landmark" /></label>
-        <label><span>Vehicle</span><input name="vehicle" type="text" required placeholder="Make and model" /></label>
+        <label><span>Your name</span><input name="name" type="text" autoComplete="name" enterKeyHint="next" required placeholder="Full name" /></label>
+        <label><span>Phone number</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" enterKeyHint="next" required placeholder="e.g. 0774 870 729" /></label>
+        <label><span>Your location</span><input name="location" type="text" autoComplete="street-address" enterKeyHint="next" required placeholder="Road, suburb or landmark" /></label>
+        <label><span>Vehicle</span><input name="vehicle" type="text" enterKeyHint="next" required placeholder="Make and model" /></label>
         <label className="form-wide"><span>What help do you need?</span>
-          <select name="service" required defaultValue="">
+          <select name="service" required value={service} onChange={(event) => setService(event.target.value)}>
             <option value="" disabled>Select a service</option>
             <option>Emergency towing</option><option>Flatbed transport</option><option>Jump start</option>
             <option>Tyre assistance</option><option>Fuel delivery</option><option>Specialist transport</option>
+            <option>Specify</option>
           </select>
         </label>
-        <label className="form-wide"><span>Anything else we should know?</span><textarea name="details" rows={4} placeholder="Tell us what happened and whether the vehicle is in a safe position." /></label>
+        {service === "Specify" && (
+          <label className="form-wide specify-service"><span>Please specify the service</span><input name="specifiedService" type="text" enterKeyHint="next" required placeholder="Describe the help you need" /></label>
+        )}
+        <label className="form-wide"><span>Anything else we should know?</span><textarea name="details" rows={4} enterKeyHint="done" placeholder="Tell us what happened and whether the vehicle is in a safe position." /></label>
       </div>
       <button className="button button-primary form-submit" type="submit"><Icon name="message" />Continue in WhatsApp</button>
       <p className="form-note">This form does not confirm a booking. Our team will respond on WhatsApp with availability and next steps.</p>

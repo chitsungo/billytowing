@@ -34,4 +34,22 @@ test("renders development preview metadata", async () => {
   const html = await response.text();
   assert.match(html, developmentPreviewMeta);
   assert.match(html, faviconLink);
+
+  const contactResponse = await worker.fetch(
+    new Request("http://localhost/contact", {
+      headers: { accept: "text/html" },
+    }),
+    {
+      ASSETS: {
+        fetch: async () => new Response("Not found", { status: 404 }),
+      },
+    },
+    {
+      waitUntil() {},
+      passThroughOnException() {},
+    },
+  );
+
+  assert.equal(contactResponse.status, 200);
+  assert.match(await contactResponse.text(), /<option>Specify<\/option>/i);
 });
