@@ -10,11 +10,13 @@ const faviconLink =
 test("declares light defaults and system-controlled dark mode", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  assert.match(css, /--page-bg:\s*var\(--white\)/i);
+  assert.match(css, /--page-bg:\s*#f3f5f7/i);
   assert.match(css, /color-scheme:\s*light/i);
   assert.match(css, /@media\s*\(prefers-color-scheme:\s*dark\)/i);
   assert.match(css, /--page-bg:\s*var\(--black\)/i);
   assert.match(css, /color-scheme:\s*dark/i);
+  assert.match(css, /\.fab-wrap\.open \.fab-main\s*\{[^}]*background:\s*var\(--navy\)/i);
+  assert.match(css, /\.fab-menu a span\s*\{[^}]*background:\s*var\(--fab-label-bg\)/i);
 });
 
 test("renders development preview metadata", async () => {
