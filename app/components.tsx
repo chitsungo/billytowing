@@ -174,7 +174,7 @@ export function FloatingActions() {
   }, [open]);
 
   return (
-    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""} ${pathname === "/contact" ? "contact-page-fab" : ""}`}>
+    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""} ${pathname === "/contact" || pathname === "/" ? "mobile-no-fab" : ""}`}>
       <div id="quick-actions-menu" className="fab-menu" aria-hidden={!open}>
         <a href={`tel:${PHONE_TEL}`} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>Call Now</span><Icon name="phone" /></a>
         <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>WhatsApp</span><Icon name="message" /></a>
@@ -196,6 +196,7 @@ export function FloatingActions() {
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [timerVersion, setTimerVersion] = useState(0);
   const timerRef = useRef<number | null>(null);
 
@@ -204,6 +205,7 @@ export function HeroCarousel() {
     const timer = window.setTimeout(
       () => {
         timerRef.current = null;
+        setDirection("forward");
         setActive((value) => getCarouselIndex(value, 1, heroSlides.length));
       },
       6000,
@@ -228,12 +230,14 @@ export function HeroCarousel() {
 
   const select = (index: number) => {
     cancelAutoAdvance();
+    setDirection(index < active ? "backward" : "forward");
     setActive(index);
     resetAutoAdvance();
   };
 
   const move = (direction: number) => {
     cancelAutoAdvance();
+    setDirection(direction < 0 ? "backward" : "forward");
     setActive((value) => getCarouselIndex(value, direction, heroSlides.length));
     resetAutoAdvance();
   };
@@ -242,7 +246,7 @@ export function HeroCarousel() {
     <section className="hero-carousel" aria-label="Billy Towing emergency services">
       {heroSlides.map((slide, index) => (
         <article
-          className={`hero-slide ${index === active ? "active" : ""}`}
+          className={`hero-slide hero-slide-${direction} ${index === active ? "active" : ""}`}
           key={slide.title}
           aria-hidden={index !== active}
           inert={index !== active}
@@ -256,16 +260,20 @@ export function HeroCarousel() {
             loading={index === 0 ? "eager" : "lazy"}
           />
           <div className="hero-overlay" />
+          <div className="hero-transition-sweep" aria-hidden="true" />
           <div className="hero-content container">
             <div className="hero-copy">
-              <p className="eyebrow"><span />{slide.eyebrow}</p>
+              <div className="hero-meta">
+                <p className="eyebrow"><span />{slide.eyebrow}</p>
+                <p className="hero-slot-number"><span>{String(index + 1).padStart(2, "0")}</span><i />{String(heroSlides.length).padStart(2, "0")}</p>
+              </div>
               <h1>{slide.title}</h1>
               <p className="hero-body">{slide.body}</p>
               <div className="hero-actions">
                 <a className="button button-primary" href={`tel:${PHONE_TEL}`}>
-                  <Icon name="phone" /> Call Now
+                  <Icon name="phone" /> Call Emergency Line
                 </a>
-                <a className="text-link" href="/services">View our services <Icon name="arrow" /></a>
+                <a className="text-link" href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp your location <Icon name="arrow" /></a>
               </div>
             </div>
             <div className="hero-status">

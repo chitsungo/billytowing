@@ -34,6 +34,7 @@ test("renders development preview metadata", async () => {
   const html = await response.text();
   assert.match(html, developmentPreviewMeta);
   assert.match(html, faviconLink);
+  assert.match(html, /Stranded\? Call Us Now\./i);
 
   const contactResponse = await worker.fetch(
     new Request("http://localhost/contact", {

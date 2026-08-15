@@ -169,38 +169,42 @@ export const siteImages: SiteImage[] = [
   },
 ];
 
-export const heroSlides = [
+// Hero messaging and imagery are deliberately separate. Images can be replaced
+// in heroImages without rewriting the purpose or copy of each carousel slot.
+const heroImages = [siteImages[0], siteImages[1], siteImages[2], siteImages[3], siteImages[4]];
+
+const heroMessages = [
   {
-    image: siteImages[0],
-    eyebrow: "Harare roadside response",
-    title: "24/7 Emergency Towing",
-    body: "Stranded? Stay where you are. Our local team is ready to respond day or night.",
+    eyebrow: "24/7 emergency response",
+    title: "Stranded? Call Us Now.",
+    body: "Tell us where you are and what happened. Our experienced recovery team will guide you and arrange the right response.",
   },
   {
-    image: siteImages[1],
-    eyebrow: "Careful recovery",
-    title: "Fast. Safe. Under Control.",
-    body: "Professional loading, secure transport and careful handling from pickup to drop-off.",
+    eyebrow: "Trusted across Harare",
+    title: "Your Vehicle Is in Capable Hands.",
+    body: "Professional operators, proven recovery equipment and careful handling from first contact to safe delivery.",
   },
   {
-    image: siteImages[2],
-    eyebrow: "Always on call",
-    title: "Help Does Not Keep Office Hours",
-    body: "When the road stops you, one call gets an experienced recovery team moving.",
+    eyebrow: "Day or night",
+    title: "One Call Starts the Recovery.",
+    body: "Breakdown, accident or a vehicle that cannot move—we respond with a clear plan and keep you informed throughout.",
   },
   {
-    image: siteImages[3],
-    eyebrow: "Vehicles of all sizes",
-    title: "The Right Truck for the Job",
-    body: "Flatbed recovery for cars, SUVs, pickups and specialist vehicle transport.",
+    eyebrow: "Recovery for every situation",
+    title: "The Right Equipment. The Right Approach.",
+    body: "Secure flatbed towing for cars, SUVs, pickups and specialist loads, handled with control at every stage.",
   },
   {
-    image: siteImages[4],
-    eyebrow: "Local and dependable",
-    title: "A Professional Harare Team",
-    body: "Calm communication, capable equipment and a clear plan when you need help most.",
+    eyebrow: "Local. Established. Dependable.",
+    title: "Harare Has a Team It Can Rely On.",
+    body: "A reputable local towing service built on reliable response, straightforward communication and work you can trust.",
   },
 ];
+
+export const heroSlides = heroMessages.map((message, index) => ({
+  ...message,
+  image: heroImages[index],
+}));
 
 export const services = [
   {
@@ -240,4 +244,3 @@ export const services = [
       "Planned movement of caravans, forklifts, tractors and other equipment requiring a flatbed.",
   },
 ];
-
