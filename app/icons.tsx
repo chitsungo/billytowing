@@ -4,6 +4,8 @@ type IconProps = SVGProps<SVGSVGElement> & {
   name:
     | "phone"
     | "message"
+    | "mail"
+    | "instagram"
     | "calendar"
     | "menu"
     | "close"
@@ -36,6 +38,8 @@ export function Icon({ name, ...props }: IconProps) {
   const paths: Record<IconProps["name"], React.ReactNode> = {
     phone: <><path d="M7.2 3.5 9.4 8 7.7 9.7c1.4 3 3.1 4.7 6.1 6.1l1.7-1.7 4.5 2.2v3c0 .7-.6 1.2-1.2 1.2C10.3 20.1 3.9 13.7 3.5 5.2 3.5 4.6 4 4 4.7 4Z" /></>,
     message: <><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.4-4.1A8 8 0 1 1 20 11.5Z" /><path d="M8.5 9.2c.7 2.7 2 4 4.7 4.7" /></>,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".7" fill="currentColor" stroke="none" /></>,
     calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" /></>,
     menu: <><path d="M4 7h16M4 12h16M4 17h16" /></>,
     close: <><path d="m5 5 14 14M19 5 5 19" /></>,
@@ -56,4 +60,3 @@ export function Icon({ name, ...props }: IconProps) {
 
   return <svg {...common} {...props}>{paths[name]}</svg>;
 }
-

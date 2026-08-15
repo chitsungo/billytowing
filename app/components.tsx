@@ -4,7 +4,20 @@ import { FormEvent, PointerEvent as ReactPointerEvent, useEffect, useRef, useSta
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getCarouselIndex, getSwipeDirection } from "./carousel";
-import { heroSlides, PHONE_DISPLAY, PHONE_TEL, services, siteImages, WHATSAPP_URL } from "./data";
+import {
+  ADDRESS,
+  EMAIL,
+  EMAIL_URL,
+  heroSlides,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
+  MAP_DIRECTIONS_URL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  services,
+  siteImages,
+  WHATSAPP_URL,
+} from "./data";
 import { Icon } from "./icons";
 
 const navigation = [
@@ -137,7 +150,9 @@ export function Footer() {
           <div className="footer-contact">
             <a href={`tel:${PHONE_TEL}`}><Icon name="phone" />{PHONE_DISPLAY}</a>
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"><Icon name="message" />WhatsApp us</a>
-            <span><Icon name="pin" />Harare, Zimbabwe</span>
+            <a href={EMAIL_URL}><Icon name="mail" />{EMAIL}</a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"><Icon name="instagram" />{INSTAGRAM_HANDLE}</a>
+            <a className="footer-address" href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer"><Icon name="pin" />{ADDRESS}</a>
             <span><Icon name="clock" />Open 24 hours</span>
           </div>
         </div>

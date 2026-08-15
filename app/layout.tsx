@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
 import { FloatingActions, Footer, Header } from "./components";
+import { EMAIL, INSTAGRAM_URL, PHONE_TEL } from "./data";
 import "./globals.css";
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Billy Towing",
+  description: "24/7 towing, vehicle recovery and roadside assistance in Harare.",
+  telephone: PHONE_TEL,
+  email: EMAIL,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Nest Close, 15292 Falcon Drive",
+    addressLocality: "Harare",
+    addressCountry: "ZW",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -17.7993056,
+    longitude: 30.9756111,
+  },
+  sameAs: [INSTAGRAM_URL],
+  openingHours: "Mo-Su 00:00-23:59",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -24,6 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+        />
         <Header />
         {children}
         <Footer />

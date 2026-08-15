@@ -2,6 +2,16 @@ export const PHONE_DISPLAY = "+263 774 870 729";
 export const PHONE_TEL = "+263774870729";
 export const WHATSAPP_URL =
   "https://wa.me/263774870729?text=Hello%20Billy%20Towing%2C%20I%20need%20roadside%20assistance.";
+export const EMAIL = "billytowing01@gmail.com";
+export const EMAIL_URL = `mailto:${EMAIL}`;
+export const INSTAGRAM_HANDLE = "@billytowing_";
+export const INSTAGRAM_URL = "https://www.instagram.com/billytowing_/";
+export const ADDRESS = "Nest Close, 15292 Falcon Drive, Harare";
+export const MAP_COORDINATES = "17°47′57.5″S, 30°58′32.2″E";
+export const MAP_EMBED_URL =
+  "https://www.google.com/maps?q=-17.7993056,30.9756111&z=15&output=embed";
+export const MAP_DIRECTIONS_URL =
+  "https://www.google.com/maps/search/?api=1&query=-17.7993056%2C30.9756111";
 
 export type SiteImage = {
   src: string;

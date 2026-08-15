@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CallToAction, PageHero, SectionIntro, ServiceCard } from "../components";
-import { services } from "../data";
+import { ADDRESS, MAP_DIRECTIONS_URL, services } from "../data";
 import { Icon } from "../icons";
 
 export const metadata: Metadata = {
@@ -43,11 +43,10 @@ export default function ServicesPage() {
         <div className="container coverage-grid">
           <div className="coverage-icon"><Icon name="pin" /></div>
           <div><p className="eyebrow"><span />Service area</p><h2>Harare and surrounding areas.</h2></div>
-          <p>Not sure whether we can reach you? Call with your location and we will confirm availability.</p>
+          <p>Based at <a href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer">{ADDRESS}</a>. Not sure whether we can reach you? Call with your location and we will confirm availability.</p>
         </div>
       </section>
       <CallToAction title="Tell us what happened. We’ll handle the recovery." />
     </main>
   );
 }
-

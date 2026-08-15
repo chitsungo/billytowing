@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CallToAction, PageHero, SectionIntro } from "../components";
+import { ADDRESS } from "../data";
 import { Icon } from "../icons";
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export default function AboutPage() {
             <article><span><Icon name="clock" /></span><h3>Reliable</h3><p>Available 24 hours, with honest communication from dispatch to delivery.</p></article>
             <article><span><Icon name="shield" /></span><h3>Careful</h3><p>Secure loading and controlled transport that respects your vehicle.</p></article>
             <article><span><Icon name="check" /></span><h3>Professional</h3><p>A capable team, clean process and clear expectations from the first call.</p></article>
-            <article><span><Icon name="pin" /></span><h3>Local</h3><p>Based in Harare and familiar with the roads, suburbs and surrounding routes.</p></article>
+            <article><span><Icon name="pin" /></span><h3>Local</h3><p>Based at {ADDRESS} and familiar with Harare roads, suburbs and surrounding routes.</p></article>
           </div>
         </div>
       </section>
@@ -53,4 +54,3 @@ export default function AboutPage() {
     </main>
   );
 }
-

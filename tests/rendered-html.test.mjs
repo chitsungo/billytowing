@@ -36,6 +36,10 @@ test("renders development preview metadata", async () => {
   assert.match(html, faviconLink);
   assert.match(html, /Stranded\? Call Us Now\./i);
   assert.match(html, /class="[^"]*hero-emergency-call[^"]*"/i);
+  assert.match(html, /Nest Close, 15292 Falcon Drive, Harare/i);
+  assert.match(html, /billytowing01@gmail\.com/i);
+  assert.match(html, /@billytowing_/i);
+  assert.match(html, /instagram\.com\/billytowing_/i);
 
   const contactResponse = await worker.fetch(
     new Request("http://localhost/contact", {
@@ -53,5 +57,9 @@ test("renders development preview metadata", async () => {
   );
 
   assert.equal(contactResponse.status, 200);
-  assert.match(await contactResponse.text(), /<option>Specify<\/option>/i);
+  const contactHtml = await contactResponse.text();
+  assert.match(contactHtml, /<option>Specify<\/option>/i);
+  assert.match(contactHtml, /mailto:billytowing01@gmail\.com/i);
+  assert.match(contactHtml, /Nest Close, 15292 Falcon Drive, Harare/i);
+  assert.match(contactHtml, /@billytowing_/i);
 });

@@ -1,5 +1,5 @@
 import { CallToAction, GalleryGrid, HeroCarousel, SectionIntro, ServiceCard } from "./components";
-import { PHONE_TEL, services } from "./data";
+import { ADDRESS, MAP_COORDINATES, MAP_DIRECTIONS_URL, MAP_EMBED_URL, PHONE_TEL, services } from "./data";
 import { Icon } from "./icons";
 
 const trustItems = [
@@ -8,9 +8,6 @@ const trustItems = [
   { icon: "shield", label: "Fully insured" },
   { icon: "pin", label: "Local Harare team" },
 ] as const;
-
-const MAP_EMBED_URL = "https://www.google.com/maps?q=-17.7993056,30.9756111&z=15&output=embed";
-const MAP_DIRECTIONS_URL = "https://www.google.com/maps/search/?api=1&query=-17.7993056%2C30.9756111";
 
 export default function Home() {
   return (
@@ -33,8 +30,8 @@ export default function Home() {
                 <span className="flex h-[42px] w-[42px] items-center justify-center bg-[#002B5B]"><Icon name="pin" /></span>
                 <div>
                   <p className="m-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#C9CDD2]">Billy Towing base</p>
-                  <p className="mt-1 mb-0 font-semibold text-white">Harare, Zimbabwe</p>
-                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">17°47′57.5″S, 30°58′32.2″E</p>
+                  <p className="mt-1 mb-0 font-semibold text-white">{ADDRESS}</p>
+                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">{MAP_COORDINATES}</p>
                 </div>
               </div>
             </div>

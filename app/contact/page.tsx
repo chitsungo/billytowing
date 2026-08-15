@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import { BookingForm, PageHero, SectionIntro } from "../components";
-import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "../data";
+import {
+  ADDRESS,
+  EMAIL,
+  EMAIL_URL,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
+  MAP_DIRECTIONS_URL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+} from "../data";
 import { Icon } from "../icons";
 
 export const metadata: Metadata = {
@@ -19,10 +29,12 @@ export default function ContactPage() {
             <div className="contact-cards">
               <a href={`tel:${PHONE_TEL}`}><span><Icon name="phone" /></span><div><small>Emergency phone</small><strong>{PHONE_DISPLAY}</strong><p>Tap to call now</p></div><Icon name="arrow" /></a>
               <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"><span><Icon name="message" /></span><div><small>WhatsApp</small><strong>Message our team</strong><p>Share photos and your location</p></div><Icon name="arrow" /></a>
+              <a href={EMAIL_URL}><span><Icon name="mail" /></span><div><small>Email</small><strong>{EMAIL}</strong><p>For quotes and non-urgent enquiries</p></div><Icon name="arrow" /></a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"><span><Icon name="instagram" /></span><div><small>Instagram</small><strong>{INSTAGRAM_HANDLE}</strong><p>Follow our latest recovery work</p></div><Icon name="arrow" /></a>
             </div>
             <div className="contact-facts">
               <div><Icon name="clock" /><div><small>Hours</small><strong>Open 24 hours, every day</strong></div></div>
-              <div><Icon name="pin" /><div><small>Based in</small><strong>Harare, Zimbabwe</strong></div></div>
+              <a href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer"><Icon name="pin" /><div><small>Our address</small><strong>{ADDRESS}</strong></div></a>
               <div><Icon name="shield" /><div><small>Service</small><strong>Fully insured recovery</strong></div></div>
             </div>
           </div>
@@ -43,4 +55,3 @@ export default function ContactPage() {
     </main>
   );
 }
-
