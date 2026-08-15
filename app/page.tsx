@@ -24,6 +24,40 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section border-y border-white/10 bg-[#002B5B]/10" aria-label="Billy Towing location">
+        <div className="container grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch lg:gap-16">
+          <div className="flex flex-col justify-center">
+            <SectionIntro eyebrow="Our location" title="Based in Harare. Ready to respond." body="Find Billy Towing at the location below, or open Google Maps for directions directly from your current position." />
+            <div className="mt-9 border-y border-white/15 py-6">
+              <div className="grid grid-cols-[42px_1fr] items-center gap-4">
+                <span className="flex h-[42px] w-[42px] items-center justify-center bg-[#002B5B]"><Icon name="pin" /></span>
+                <div>
+                  <p className="m-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#C9CDD2]">Billy Towing base</p>
+                  <p className="mt-1 mb-0 font-semibold text-white">Harare, Zimbabwe</p>
+                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">17°47′57.5″S, 30°58′32.2″E</p>
+                </div>
+              </div>
+            </div>
+            <a className="button button-primary mt-8 self-start" href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer">
+              Open in Google Maps <Icon name="arrow" />
+            </a>
+          </div>
+          <div className="relative min-h-[380px] overflow-hidden border border-white/15 bg-[#0A0A0A] lg:min-h-[540px]">
+            <iframe
+              className="absolute inset-0 h-full w-full border-0"
+              src={MAP_EMBED_URL}
+              title="Google Map showing Billy Towing in Harare"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className="pointer-events-none absolute top-4 left-4 border border-white/15 bg-[#0A0A0A]/90 px-4 py-3 shadow-lg">
+              <span className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white">Harare location</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section services-section">
         <div className="container">
           <div className="section-heading-row">
@@ -61,40 +95,6 @@ export default function Home() {
             <a className="text-link section-link" href="/gallery">View full gallery <Icon name="arrow" /></a>
           </div>
           <GalleryGrid limit={6} />
-        </div>
-      </section>
-
-      <section className="section border-y border-white/10 bg-[#002B5B]/10" aria-label="Billy Towing location">
-        <div className="container grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch lg:gap-16">
-          <div className="flex flex-col justify-center">
-            <SectionIntro eyebrow="Our location" title="Based in Harare. Ready to respond." body="Find Billy Towing at the location below, or open Google Maps for directions directly from your current position." />
-            <div className="mt-9 border-y border-white/15 py-6">
-              <div className="grid grid-cols-[42px_1fr] items-center gap-4">
-                <span className="flex h-[42px] w-[42px] items-center justify-center bg-[#002B5B]"><Icon name="pin" /></span>
-                <div>
-                  <p className="m-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#C9CDD2]">Billy Towing base</p>
-                  <p className="mt-1 mb-0 font-semibold text-white">Harare, Zimbabwe</p>
-                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">17°47′57.5″S, 30°58′32.2″E</p>
-                </div>
-              </div>
-            </div>
-            <a className="button button-primary mt-8 self-start" href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer">
-              Open in Google Maps <Icon name="arrow" />
-            </a>
-          </div>
-          <div className="relative min-h-[380px] overflow-hidden border border-white/15 bg-[#0A0A0A] lg:min-h-[540px]">
-            <iframe
-              className="absolute inset-0 h-full w-full border-0"
-              src={MAP_EMBED_URL}
-              title="Google Map showing Billy Towing in Harare"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
-            <div className="pointer-events-none absolute top-4 left-4 border border-white/15 bg-[#0A0A0A]/90 px-4 py-3 shadow-lg">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white">Harare location</span>
-            </div>
-          </div>
         </div>
       </section>
 
