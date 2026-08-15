@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, PointerEvent as ReactPointerEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getCarouselIndex } from "./carousel";
+import { getCarouselIndex, getSwipeDirection } from "./carousel";
 import { heroSlides, PHONE_DISPLAY, PHONE_TEL, services, siteImages, WHATSAPP_URL } from "./data";
 import { Icon } from "./icons";
 
@@ -199,6 +199,7 @@ export function HeroCarousel() {
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [timerVersion, setTimerVersion] = useState(0);
   const timerRef = useRef<number | null>(null);
+  const swipeStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -242,8 +243,52 @@ export function HeroCarousel() {
     resetAutoAdvance();
   };
 
+  const startSwipe = (event: ReactPointerEvent<HTMLElement>) => {
+    if (!event.isPrimary || event.pointerType !== "touch") return;
+    if (event.target instanceof Element && event.target.closest("a, button")) return;
+
+    swipeStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      time: event.timeStamp,
+    };
+    cancelAutoAdvance();
+  };
+
+  const finishSwipe = (event: ReactPointerEvent<HTMLElement>) => {
+    const start = swipeStartRef.current;
+    swipeStartRef.current = null;
+    if (!start || event.pointerType !== "touch") return;
+
+    const swipeDirection = getSwipeDirection(start, {
+      x: event.clientX,
+      y: event.clientY,
+      time: event.timeStamp,
+    });
+
+    if (swipeDirection === 0) {
+      resetAutoAdvance();
+      return;
+    }
+
+    move(swipeDirection);
+  };
+
+  const cancelSwipe = () => {
+    if (swipeStartRef.current === null) return;
+    swipeStartRef.current = null;
+    resetAutoAdvance();
+  };
+
   return (
-    <section className="hero-carousel" aria-label="Billy Towing emergency services">
+    <section
+      className="hero-carousel"
+      aria-label="Billy Towing emergency services"
+      aria-roledescription="carousel"
+      onPointerDown={startSwipe}
+      onPointerUp={finishSwipe}
+      onPointerCancel={cancelSwipe}
+    >
       {heroSlides.map((slide, index) => (
         <article
           className={`hero-slide hero-slide-${direction} ${index === active ? "active" : ""}`}

@@ -370,9 +370,10 @@ button { color: inherit; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 12px; }
   .hero-actions .button { min-height: 48px; width: 100%; }
   .hero-actions .text-link { font-size: .68rem; }
-  .carousel-controls { bottom: 22px; }
+  .carousel-controls { bottom: 22px; justify-content: center; }
   .carousel-dots button { height: 48px; padding-block: 21px; width: 34px; }
-  .carousel-arrows button { height: 48px; width: 48px; }
+  .carousel-arrows { display: none; }
+  .hero-carousel { touch-action: pan-y; }
   .trust-grid span { font-size: .61rem; }
   .trust-grid svg { height: 18px; width: 18px; }
   .section-heading-row { align-items: flex-start; flex-direction: column; gap: 28px; margin-bottom: 38px; }
