@@ -21,35 +21,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section border-y border-white/10 bg-[#002B5B]/10" aria-label="Billy Towing location">
-        <div className="container grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch lg:gap-16">
-          <div className="flex flex-col justify-center">
+      <section className="section location-section" aria-label="Billy Towing location">
+        <div className="container location-grid">
+          <div className="location-copy">
             <SectionIntro eyebrow="Our location" title="Based in Harare. Ready to respond." body="Find Billy Towing at the location below, or open Google Maps for directions directly from your current position." />
-            <div className="mt-9 border-y border-white/15 py-6">
-              <div className="grid grid-cols-[42px_1fr] items-center gap-4">
-                <span className="flex h-[42px] w-[42px] items-center justify-center bg-[#002B5B]"><Icon name="pin" /></span>
+            <div className="location-details">
+              <div className="location-address">
+                <span className="location-pin"><Icon name="pin" /></span>
                 <div>
-                  <p className="m-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#C9CDD2]">Billy Towing base</p>
-                  <p className="mt-1 mb-0 font-semibold text-white">{ADDRESS}</p>
-                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">{MAP_COORDINATES}</p>
+                  <p className="location-kicker">Billy Towing base</p>
+                  <p className="location-name">{ADDRESS}</p>
+                  <p className="location-coordinates">{MAP_COORDINATES}</p>
                 </div>
               </div>
             </div>
-            <a className="button button-primary mt-8 self-start" href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer">
+            <a className="button button-primary location-map-link" href={MAP_DIRECTIONS_URL} target="_blank" rel="noreferrer">
               Open in Google Maps <Icon name="arrow" />
             </a>
           </div>
-          <div className="relative min-h-[380px] overflow-hidden border border-white/15 bg-[#0A0A0A] lg:min-h-[540px]">
+          <div className="map-card">
             <iframe
-              className="absolute inset-0 h-full w-full border-0"
+              className="map-frame"
               src={MAP_EMBED_URL}
               title="Google Map showing Billy Towing in Harare"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-            <div className="pointer-events-none absolute top-4 left-4 border border-white/15 bg-[#0A0A0A]/90 px-4 py-3 shadow-lg">
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-white">Harare location</span>
+            <div className="map-label">
+              <span>Harare location</span>
             </div>
           </div>
         </div>

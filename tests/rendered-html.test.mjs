@@ -1,10 +1,21 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const developmentPreviewMeta =
   /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
 const faviconLink =
   /<link(?=[^>]*\brel=["'][^"']*icon[^"']*["'])(?=[^>]*\bhref=["']\/favicon\.svg["'])[^>]*>/i;
+
+test("declares light defaults and system-controlled dark mode", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--page-bg:\s*var\(--white\)/i);
+  assert.match(css, /color-scheme:\s*light/i);
+  assert.match(css, /@media\s*\(prefers-color-scheme:\s*dark\)/i);
+  assert.match(css, /--page-bg:\s*var\(--black\)/i);
+  assert.match(css, /color-scheme:\s*dark/i);
+});
 
 test("renders development preview metadata", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);

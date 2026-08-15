@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { FloatingActions, Footer, Header } from "./components";
 import { EMAIL, INSTAGRAM_URL, PHONE_TEL } from "./data";
 import "./globals.css";
@@ -37,6 +37,14 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   other: { "codex-preview": "development" },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0A" },
+  ],
 };
 
 export default function RootLayout({
