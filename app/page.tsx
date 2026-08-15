@@ -9,8 +9,8 @@ const trustItems = [
   { icon: "pin", label: "Local Harare team" },
 ] as const;
 
-const MAP_EMBED_URL = "https://www.google.com/maps?q=-17.7993,30.9756&z=15&output=embed";
-const MAP_DIRECTIONS_URL = "https://www.google.com/maps/search/?api=1&query=-17.7993%2C30.9756";
+const MAP_EMBED_URL = "https://www.google.com/maps?q=-17.7993056,30.9756111&z=15&output=embed";
+const MAP_DIRECTIONS_URL = "https://www.google.com/maps/search/?api=1&query=-17.7993056%2C30.9756111";
 
 export default function Home() {
   return (
@@ -74,6 +74,7 @@ export default function Home() {
                 <div>
                   <p className="m-0 text-[0.65rem] font-bold uppercase tracking-[0.12em] text-[#C9CDD2]">Billy Towing base</p>
                   <p className="mt-1 mb-0 font-semibold text-white">Harare, Zimbabwe</p>
+                  <p className="mt-1 mb-0 text-xs text-[#C9CDD2]">17°47′57.5″S, 30°58′32.2″E</p>
                 </div>
               </div>
             </div>
