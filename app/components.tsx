@@ -153,7 +153,32 @@ export function Footer() {
 export function FloatingActions() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [contextTargetVisible, setContextTargetVisible] = useState(pathname === "/" || pathname === "/contact");
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const selector = pathname === "/"
+      ? ".hero-emergency-call"
+      : pathname === "/contact"
+        ? ".booking-form"
+        : null;
+
+    if (!selector) return;
+
+    const target = document.querySelector(selector);
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setContextTargetVisible(entry.isIntersecting);
+        if (entry.isIntersecting) setOpen(false);
+      },
+      { threshold: pathname === "/" ? 0.15 : 0.01 },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -174,7 +199,7 @@ export function FloatingActions() {
   }, [open]);
 
   return (
-    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""} ${pathname === "/contact" || pathname === "/" ? "mobile-no-fab" : ""}`}>
+    <div ref={containerRef} className={`fab-wrap ${open ? "open" : ""} ${(pathname === "/" || pathname === "/contact") && contextTargetVisible ? "fab-context-hidden" : ""}`}>
       <div id="quick-actions-menu" className="fab-menu" aria-hidden={!open}>
         <a href={`tel:${PHONE_TEL}`} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>Call Now</span><Icon name="phone" /></a>
         <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}><span>WhatsApp</span><Icon name="message" /></a>
@@ -305,7 +330,6 @@ export function HeroCarousel() {
             loading={index === 0 ? "eager" : "lazy"}
           />
           <div className="hero-overlay" />
-          <div className="hero-transition-sweep" aria-hidden="true" />
           <div className="hero-content container">
             <div className="hero-copy">
               <div className="hero-meta">
@@ -315,7 +339,7 @@ export function HeroCarousel() {
               <h1>{slide.title}</h1>
               <p className="hero-body">{slide.body}</p>
               <div className="hero-actions">
-                <a className="button button-primary" href={`tel:${PHONE_TEL}`}>
+                <a className="button button-primary hero-emergency-call" href={`tel:${PHONE_TEL}`}>
                   <Icon name="phone" /> Call Emergency Line
                 </a>
                 <a className="text-link" href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp your location <Icon name="arrow" /></a>
