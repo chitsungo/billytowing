@@ -37,6 +37,14 @@ test("keeps the homepage recovery image balanced on mobile", async () => {
   assert.match(css, /\.why-image-card\s*\{[^}]*min-width:\s*0;[^}]*padding:\s*16px\s+18px/i);
 });
 
+test("fades each page in over 150 milliseconds", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /main\s*\{\s*animation:\s*page-fade-in\s+150ms\s+ease-out\s+both/i);
+  assert.match(css, /@keyframes\s+page-fade-in\s*\{[^}]*from\s*\{\s*opacity:\s*0/i);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/i);
+});
+
 test("renders development preview metadata", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
