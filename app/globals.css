@@ -445,11 +445,14 @@ button { color: inherit; }
   .section-intro > p:last-child { font-size: .92rem; }
   .service-grid { grid-template-columns: 1fr; }
   .service-card { min-height: 330px; padding: 28px; }
-  .why-grid { gap: 54px; }
-  .why-image-wrap { min-height: 440px; }
-  .why-image-wrap::after { inset: 12px -8px -12px 8px; }
-  .why-image-card { min-width: 160px; padding: 22px; }
-  .why-image-card strong { font-size: 2rem; }
+  .why-section { padding-top: 44px; }
+  .why-grid { gap: 40px; }
+  .why-image-wrap { aspect-ratio: 4 / 3; min-height: 0; overflow: hidden; }
+  .why-image-wrap > img { object-position: center 55%; }
+  .why-image-wrap::after { display: none; }
+  .why-image-card { min-width: 0; padding: 16px 18px; }
+  .why-image-card strong { font-size: 1.75rem; }
+  .why-image-card span { font-size: .58rem; margin-top: 7px; }
   .gallery-grid { columns: 1; margin-top: 38px; }
   .gallery-teaser-grid { columns: auto; display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
   .gallery-teaser-grid .gallery-item { height: 220px; margin: 0; }

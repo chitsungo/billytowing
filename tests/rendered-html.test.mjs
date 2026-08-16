@@ -29,6 +29,14 @@ test("uses subtle rounding globally while preserving intentional circles", async
   assert.match(css, /\.status-dot\s*\{[^}]*border-radius:\s*50%/i);
 });
 
+test("keeps the homepage recovery image balanced on mobile", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /\.why-image-wrap\s*\{[^}]*aspect-ratio:\s*4\s*\/\s*3;[^}]*min-height:\s*0;[^}]*overflow:\s*hidden/i);
+  assert.match(css, /\.why-image-wrap::after\s*\{\s*display:\s*none/i);
+  assert.match(css, /\.why-image-card\s*\{[^}]*min-width:\s*0;[^}]*padding:\s*16px\s+18px/i);
+});
+
 test("renders development preview metadata", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
