@@ -19,6 +19,14 @@ test("declares light defaults and system-controlled dark mode", async () => {
   assert.match(css, /\.fab-menu a span\s*\{[^}]*background:\s*var\(--fab-label-bg\)/i);
 });
 
+test("uses subtle rounding on buttons without rounding cards", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--button-radius:\s*2px/i);
+  assert.match(css, /\.button\s*\{[^}]*border-radius:\s*var\(--button-radius\)/i);
+  assert.doesNotMatch(css, /\.service-card\s*\{[^}]*border-radius:/i);
+});
+
 test("renders development preview metadata", async () => {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
