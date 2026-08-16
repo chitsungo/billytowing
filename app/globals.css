@@ -164,7 +164,7 @@ button { color: inherit; }
 
 .trust-bar { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.14); color: var(--white); }
 .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.trust-grid > div { align-items: center; border-right: 1px solid rgba(255,255,255,.16); display: flex; gap: 12px; justify-content: center; min-height: 82px; }
+.trust-grid > div { align-items: center; border-radius: 0; border-right: 1px solid rgba(255,255,255,.16); display: flex; gap: 12px; justify-content: center; min-height: 82px; }
 .trust-grid > div:first-child { border-left: 1px solid rgba(255,255,255,.16); }
 .trust-grid svg { height: 21px; width: 21px; }
 .trust-grid span { font-size: .72rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }

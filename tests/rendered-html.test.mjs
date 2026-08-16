@@ -24,6 +24,7 @@ test("uses subtle rounding globally while preserving intentional circles", async
 
   assert.match(css, /--global-radius:\s*2px/i);
   assert.match(css, /\*\s*\{[^}]*border-radius:\s*var\(--global-radius\)/i);
+  assert.match(css, /\.trust-grid\s*>\s*div\s*\{[^}]*border-radius:\s*0/i);
   assert.match(css, /\.fab-main\s*\{[^}]*border-radius:\s*50%/i);
   assert.match(css, /\.status-dot\s*\{[^}]*border-radius:\s*50%/i);
 });
