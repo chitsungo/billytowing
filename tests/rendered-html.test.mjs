@@ -19,12 +19,13 @@ test("declares light defaults and system-controlled dark mode", async () => {
   assert.match(css, /\.fab-menu a span\s*\{[^}]*background:\s*var\(--fab-label-bg\)/i);
 });
 
-test("uses subtle rounding on buttons without rounding cards", async () => {
+test("uses subtle rounding globally while preserving intentional circles", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
-  assert.match(css, /--button-radius:\s*2px/i);
-  assert.match(css, /\.button\s*\{[^}]*border-radius:\s*var\(--button-radius\)/i);
-  assert.doesNotMatch(css, /\.service-card\s*\{[^}]*border-radius:/i);
+  assert.match(css, /--global-radius:\s*2px/i);
+  assert.match(css, /\*\s*\{[^}]*border-radius:\s*var\(--global-radius\)/i);
+  assert.match(css, /\.fab-main\s*\{[^}]*border-radius:\s*50%/i);
+  assert.match(css, /\.status-dot\s*\{[^}]*border-radius:\s*50%/i);
 });
 
 test("renders development preview metadata", async () => {

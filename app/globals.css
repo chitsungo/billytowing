@@ -23,7 +23,7 @@
   --fab-label-text: var(--white);
   --fab-label-border: rgba(0, 43, 91, .38);
   --fab-label-shadow: 0 8px 24px rgba(0, 43, 91, .16);
-  --button-radius: 2px;
+  --global-radius: 2px;
   --header-height: 82px;
   --container: 1240px;
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -54,7 +54,7 @@
   }
 }
 
-* { box-sizing: border-box; }
+* { border-radius: var(--global-radius); box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--page-bg); }
 body { margin: 0; background: var(--page-bg); color: var(--text); font-family: Calibri, "Segoe UI", Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 body, button, input, select, textarea { font: inherit; }
@@ -76,7 +76,7 @@ button { color: inherit; }
 .section-heading-row { align-items: end; display: flex; justify-content: space-between; margin-bottom: 54px; }
 .section-link { flex: none; margin: 0 0 8px 40px; }
 
-.button { align-items: center; border: 1px solid transparent; border-radius: var(--button-radius); cursor: pointer; display: inline-flex; font-size: 0.8rem; font-weight: 750; gap: 10px; justify-content: center; letter-spacing: 0.06em; min-height: 52px; padding: 0 24px; text-transform: uppercase; transition: transform 180ms var(--ease-smooth), background-color 180ms var(--ease-smooth), border-color 180ms var(--ease-smooth); }
+.button { align-items: center; border: 1px solid transparent; cursor: pointer; display: inline-flex; font-size: 0.8rem; font-weight: 750; gap: 10px; justify-content: center; letter-spacing: 0.06em; min-height: 52px; padding: 0 24px; text-transform: uppercase; transition: transform 180ms var(--ease-smooth), background-color 180ms var(--ease-smooth), border-color 180ms var(--ease-smooth); }
 .button svg { height: 18px; width: 18px; }
 .button:hover { transform: translateY(-2px); }
 .button-primary { background: var(--navy); color: var(--white); }
@@ -106,7 +106,7 @@ button { color: inherit; }
 .desktop-nav a:hover, .desktop-nav a.active { color: var(--text); }
 .desktop-nav a.active::after { transform: scaleX(1); }
 .header-actions { align-items: center; display: flex; gap: 9px; }
-.menu-toggle { align-items: center; background: transparent; border: 1px solid var(--line-strong); border-radius: var(--button-radius); cursor: pointer; display: none; height: 44px; justify-content: center; width: 44px; }
+.menu-toggle { align-items: center; background: transparent; border: 1px solid var(--line-strong); cursor: pointer; display: none; height: 44px; justify-content: center; width: 44px; }
 .menu-toggle svg { height: 22px; width: 22px; }
 .mobile-menu { background: var(--page-bg); border-bottom: 1px solid var(--line); left: 0; max-height: 0; opacity: 0; overflow: hidden; position: absolute; top: 100%; transition: max-height 300ms var(--ease-smooth), opacity 220ms var(--ease-smooth); width: 100%; }
 .mobile-menu.open { max-height: 520px; opacity: 1; }
@@ -156,7 +156,7 @@ button { color: inherit; }
 .carousel-dots button span { background: rgba(255,255,255,.36); display: block; height: 2px; overflow: hidden; position: relative; width: 100%; }
 .carousel-dots button.active span { background: var(--white); }
 .carousel-arrows { display: flex; gap: 8px; }
-.carousel-arrows button { -webkit-tap-highlight-color: transparent; align-items: center; background: rgba(10,10,10,.55); border: 1px solid rgba(255,255,255,.28); border-radius: var(--button-radius); cursor: pointer; display: flex; height: 48px; justify-content: center; touch-action: manipulation; transition: background 160ms var(--ease-smooth), border-color 160ms var(--ease-smooth), transform 160ms var(--ease-smooth); user-select: none; width: 48px; }
+.carousel-arrows button { -webkit-tap-highlight-color: transparent; align-items: center; background: rgba(10,10,10,.55); border: 1px solid rgba(255,255,255,.28); cursor: pointer; display: flex; height: 48px; justify-content: center; touch-action: manipulation; transition: background 160ms var(--ease-smooth), border-color 160ms var(--ease-smooth), transform 160ms var(--ease-smooth); user-select: none; width: 48px; }
 .carousel-arrows button:hover { background: var(--navy); }
 .carousel-dots button:active, .carousel-arrows button:active { transform: scale(.94); }
 .carousel-arrows button:first-child svg { transform: rotate(180deg); }
@@ -232,7 +232,7 @@ button { color: inherit; }
 .lightbox figure { margin: 0; max-height: calc(100vh - 100px); max-width: min(1100px, 84vw); }
 .lightbox figure img { max-height: calc(100vh - 150px); object-fit: contain; width: auto; }
 .lightbox figcaption { color: var(--grey); font-size: .78rem; margin-top: 13px; text-align: center; }
-.lightbox button { align-items: center; background: var(--navy); border: 0; border-radius: var(--button-radius); cursor: pointer; display: flex; height: 48px; justify-content: center; position: absolute; width: 48px; }
+.lightbox button { align-items: center; background: var(--navy); border: 0; cursor: pointer; display: flex; height: 48px; justify-content: center; position: absolute; width: 48px; }
 .lightbox button svg { height: 20px; width: 20px; }
 .lightbox-close { right: 24px; top: 24px; }
 .lightbox-prev { left: 24px; top: 50%; }
@@ -312,7 +312,7 @@ button { color: inherit; }
 .booking-form { isolation: isolate; position: relative; }
 .booking-form label { display: grid; gap: 8px; min-width: 0; }
 .booking-form label > span { font-size: .68rem; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
-.booking-form input, .booking-form select, .booking-form textarea { -webkit-tap-highlight-color: transparent; background: var(--field-bg); border: 1px solid var(--line-strong); border-radius: 0; color: var(--text); font-size: 1rem; outline: none; padding: 14px 15px; position: relative; touch-action: manipulation; transition: border-color 160ms var(--ease-smooth), background-color 160ms var(--ease-smooth); width: 100%; z-index: 1; }
+.booking-form input, .booking-form select, .booking-form textarea { -webkit-tap-highlight-color: transparent; background: var(--field-bg); border: 1px solid var(--line-strong); color: var(--text); font-size: 1rem; outline: none; padding: 14px 15px; position: relative; touch-action: manipulation; transition: border-color 160ms var(--ease-smooth), background-color 160ms var(--ease-smooth); width: 100%; z-index: 1; }
 .booking-form input, .booking-form select { min-height: 56px; }
 .booking-form input::placeholder, .booking-form textarea::placeholder { color: var(--muted); opacity: .78; }
 .booking-form input:focus, .booking-form select:focus, .booking-form textarea:focus { background-color: var(--field-focus); border-color: var(--text); }
